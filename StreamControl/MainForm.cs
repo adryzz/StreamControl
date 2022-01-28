@@ -23,7 +23,7 @@ namespace StreamControl
 
         private void OnShown(object? sender, EventArgs e)
         {
-            if (Utils.IsRoot)
+            if (!Utils.IsRoot)
             {
                 MessageBox.Show("This app can't work without root access.");
                 Environment.Exit(-1);

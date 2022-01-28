@@ -19,8 +19,7 @@ public class InterfacePage : TabPage
         };
         latencyUpDown.ValueChanged += LatencyUpDownOnValueChanged;
         var latencyLabel = new Label {Text = "Latency (ms): "};
-        var actualLatency =  new Label {Text = $"{latencyUpDown.Value}ms"};
-        var latencyRow = new TableRow(new TableCell(latencyLabel), new TableCell(latencyUpDown), new TableCell(actualLatency));
+        var latencyRow = new StackLayout(new StackLayoutItem(latencyLabel), new StackLayoutItem(latencyUpDown));
 
         var packetLossSlider = new Slider
         {
@@ -31,21 +30,21 @@ public class InterfacePage : TabPage
         };
         packetLossSlider.ValueChanged += PacketLossSliderOnValueChanged;
         var packetLossLabel = new Label {Text = "Packet loss (%): "};
-        var packetLossRow = new TableRow(new TableCell(packetLossSlider), new TableCell(packetLossLabel));
-        Content = new TableLayout(latencyRow, packetLossRow);
-        
+        var packetLossRow = new StackLayout(new StackLayoutItem(packetLossLabel), new StackLayoutItem(packetLossSlider));
+
         var speedSlider = new Slider
         {
             MinValue = 0,
             MaxValue = 100,
+            Value = 100,
             Width = 400,
             Height = 40
         };
         speedSlider.ValueChanged += SpeedSliderOnValueChanged;
         var speedLabel = new Label {Text = "Speed (%): "};
-        var speedRow = new TableRow(new TableCell(speedSlider), new TableCell(speedLabel));
+        var speedRow = new StackLayout(new StackLayoutItem(speedLabel), new StackLayoutItem(speedSlider));
         
-        Content = new TableLayout(latencyRow, packetLossRow, speedRow);
+        Content = new StackLayout(latencyRow, packetLossRow, speedRow);
     }
 
     private void SpeedSliderOnValueChanged(object? sender, EventArgs e)
