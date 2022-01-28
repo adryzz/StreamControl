@@ -1,2 +1,13 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using Eto.Forms;
+
+namespace StreamControl
+{
+    public static class Program
+    {
+        [STAThread]
+        static void Main()
+        {
+            new Application().Run(new MainForm());
+        }
+    }
+}
