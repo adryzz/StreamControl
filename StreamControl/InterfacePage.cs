@@ -4,6 +4,7 @@ using Eto.Forms;
 using Gtk;
 using ComboBox = Eto.Forms.ComboBox;
 using Label = Eto.Forms.Label;
+using Orientation = Eto.Forms.Orientation;
 
 namespace StreamControl;
 
@@ -26,7 +27,11 @@ public class InterfacePage : TabPage
         };
         latencyUpDown.ValueChanged += LatencyUpDownOnValueChanged;
         var latencyLabel = new Label {Text = "Latency (ms): "};
-        var latencyRow = new StackLayout(new StackLayoutItem(latencyLabel), new StackLayoutItem(latencyUpDown));
+        var latencyRow = new StackLayout(new StackLayoutItem(latencyLabel), new StackLayoutItem(latencyUpDown))
+        {
+            Orientation = Orientation.Horizontal,
+            Padding = 10
+        };
 
         var packetLossSlider = new Slider
         {
@@ -37,8 +42,12 @@ public class InterfacePage : TabPage
         };
         packetLossSlider.ValueChanged += PacketLossSliderOnValueChanged;
         var packetLossLabel = new Label {Text = "Packet loss (%): "};
-        var packetLossRow = new StackLayout(new StackLayoutItem(packetLossLabel), new StackLayoutItem(packetLossSlider));
-
+        var packetLossRow = new StackLayout(new StackLayoutItem(packetLossLabel), new StackLayoutItem(packetLossSlider))
+        {
+            Orientation = Orientation.Horizontal,
+            Padding = 10
+        };
+        
         speedUpDown = new NumericStepper
         {
             MinValue = 0,
@@ -54,8 +63,11 @@ public class InterfacePage : TabPage
         };
         speedBox.SelectedIndex = 3;
         speedBox.SelectedValueChanged += SpeedOnValueChanged;
-        var speedRow = new StackLayout(new StackLayoutItem(speedLabel), new StackLayoutItem(speedUpDown), new StackLayoutItem(speedBox));
-        
+        var speedRow = new StackLayout(new StackLayoutItem(speedLabel), new StackLayoutItem(speedUpDown), new StackLayoutItem(speedBox))
+        {
+            Orientation = Orientation.Horizontal,
+            Padding = 10
+        };
 
         Content = new StackLayout(latencyRow, packetLossRow, speedRow);
         f.Closing += FOnClosing;
