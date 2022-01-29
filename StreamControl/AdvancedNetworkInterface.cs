@@ -36,9 +36,9 @@ namespace StreamControl
         /// <summary>
         /// NIC speed (set to -1 to disable)
         /// </summary>
-        public int Rate
+        public string Rate
         {
-            set => SetFilter("rate", $"{value}%");
+            set => SetFilter("rate", value);
         }
 
         private int GetFilter(string name)
@@ -65,6 +65,13 @@ namespace StreamControl
             {
                 Utils.Run("tc", $"qdisc replace dev {Interface.Name} root netem {name} {value}");
             }
+        }
+
+        public void Reset()
+        {
+            SetFilter("loss", "-");
+            SetFilter("delay", "-");
+            SetFilter("rate", "-");
         }
     }
 }

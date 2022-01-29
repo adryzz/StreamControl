@@ -14,7 +14,7 @@ namespace StreamControl
             var tab = new TabControl();
             foreach (AdvancedNetworkInterface nic in Utils.ListInterfaces())
             {
-                tab.Pages.Add(new InterfacePage(nic));
+                tab.Pages.Add(new InterfacePage(nic, this));
             }
 
             Content = tab;
